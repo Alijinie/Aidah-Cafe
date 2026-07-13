@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aida Cafe | 100% Halal Restaurant - Mbarara Bus Park</title>
+    <meta name="description" content="Aida Cafe - Premium Halal restaurant in Mbarara Bus Park. Dine-in, delivery, event hosting and outside catering.">
+
+    <!-- Tailwind CSS via CDN - No install needed -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <script>
+        // You can change theme colors here if you want
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        gold: '#D4A017',
+                        goldLight: '#F5B731',
+                        dark: '#0A0A0A',
+                        card: '#161616',
+                        cardBorder: '#2A2A2A'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Basic resets and helpers */
+        body { background: #0A0A0A; color: #f5f5f5; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { scrollbar-width: none; }
+        /* Smooth fade for menu cards */
+        .fade-in { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(8px);} to { opacity:1; transform: translateY(0);} }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-gold selection:text-black">
+
+    <!-- ==================== HEADER / NAV ==================== -->
+    <header class="sticky top-0 z-30 bg-black/80 backdrop-blur-lg border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 h-[70px] flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gold flex items-center justify-center font-serif font-bold text-black text-xl">A</div>
+                <div>
+                    <h1 class="font-bold leading-none">AIDA <span class="text-gold">CAFE</span></h1>
+                    <p class="text-[10px] tracking-[0.2em] text-white/50 uppercase">Halal • Mbarara Bus Park</p>
+                </div>
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm text-white/60">
+                <a href="#menu" class="hover:text-white">Menu</a>
+                <a href="#services" class="hover:text-white">Services</a>
+                <a href="#events" class="hover:text-white">Events</a>
+                <span class="px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs border border-white/10">📍 Mbarara Bus Park • Open Now</span>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-2">
+                <button onclick="openCart()" class="relative bg-white/10 hover:bg-white/15 border border-white/10 px-4 py-2.5 rounded-xl text-sm flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Cart</span>
+                    <span id="cart-count" class="bg-gold text-black text-[11px] font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center">0</span>
+                </button>
+                <a href="https://wa.me/256789462495" target="_blank" class="hidden sm:flex bg-[#25D366] hover:bg-[#20bd5a] text-white px-4 py-2.5 rounded-xl text-sm font-semibold items-center gap-2">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6">
+
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="py-10 md:py-16 grid md:grid-cols-2 gap-10 items-center">
+            <div>
+                <span class="inline-flex items-center gap-2 bg-gold/10 border border-gold/20 text-gold text-xs font-bold px-3 py-1 rounded-full mb-4">
+                    ● 100% HALAL CERTIFIED
+                </span>
+                <h2 class="font-serif text-4xl md:text-6xl leading-[0.95] mb-4">
+                    Where Every <br> <span class="text-gold">Meal Is A</span> <br> Celebration
+                </h2>
+                <p class="text-white/60 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
+                    Authentic Ugandan, Swahili & Continental halal cuisine at the heart of Mbarara.
+                    Dine-in, fast delivery, and premium catering for all your events.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="scrollToMenu()" class="bg-gold hover:bg-goldLight text-black font-bold px-6 py-3.5 rounded-xl flex items-center gap-2">
+                        Order Delivery <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="openModal('table-modal')" class="bg-white/10 hover:bg-white/15 border border-white/10 px-6 py-3.5 rounded-xl font-semibold">
+                        Reserve a Table
+                    </button>
+                </div>
+                <div class="flex gap-6 mt-8 text-sm border-t border-white/10 pt-6">
+                    <div><b class="text-white text-lg">500+</b><br><span class="text-white/40">Events Hosted</span></div>
+                    <div><b class="text-white text-lg">4.9★</b><br><span class="text-white/40">Customer Rating</span></div>
+                    <div><b class="text-white text-lg">15min</b><br><span class="text-white/40">Avg. Delivery</span></div>
+                </div>
+            </div>
+
+            <!-- Hero image card stack - visual only -->
+            <div class="relative">
+                <div class="rounded-[32px] overflow-hidden border border-white/10 bg-card h-[420px] md:h-[520px] relative">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80" class="w-full h-full object-cover opacity-80" alt="Halal feast">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4 glass bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&q=80" class="w-12 h-12 rounded-xl object-cover">
+                            <div>
+                                <p class="font-semibold text-sm">Family Pilau Feast</p>
+                                <p class="text-xs text-white/50">Serves 4 • Best Seller</p>
+                            </div>
+                        </div>
+                        <span class="text-gold font-bold">UGX 45,000</span>
+                    </div>
+                </div>
+                <!-- Floating badge -->
+                <div class="absolute -top-3 -right-3 bg-white text-black text-xs font-bold px-3 py-2 rounded-full shadow-xl rotate-3">📍 Mbarara Bus Park</div>
+            </div>
+        </section>
+
+        <!-- ==================== QUICK SERVICES ==================== -->
+        <section id="services" class="py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Card 1 -->
+                <button onclick="openModal('table-modal')" class="text-left bg-card border border-cardBorder hover:border-gold/30 rounded-2xl p-5 group transition">
+                    <div class="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-gold/15 flex items-center justify-center mb-4"><i data-lucide="armchair" class="w-5 h-5 text-gold"></i></div>
+                    <h3 class="font-bold mb-1">Book a Table</h3>
+                    <p class="text-sm text-white/50 mb-3">Dine-in with family & friends. Instant confirmation via WhatsApp.</p>
+                    <span class="text-gold text-sm font-semibold">Reserve →</span>
+                </button>
+                <!-- Card 2 -->
+                <button onclick="scrollToMenu()" class="text-left bg-gold text-black rounded-2xl p-5">
+                    <div class="w-10 h-10 rounded-xl bg-black/10 flex items-center justify-center mb-4"><i data-lucide="bike" class="w-5 h-5"></i></div>
+                    <h3 class="font-bold mb-1">Order Delivery</h3>
+                    <p class="text-sm text-black/70 mb-3">Hot food delivered in 15-30 mins around Mbarara town.</p>
+                    <span class="text-black font-bold text-sm">Order Now →</span>
+                </button>
+                <!-- Card 3 -->
+                <button onclick="openModal('event-modal')" class="text-left bg-card border border-cardBorder hover:border-gold/30 rounded-2xl p-5 group transition">
+                    <div class="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-gold/15 flex items-center justify-center mb-4"><i data-lucide="party-popper" class="w-5 h-5 text-gold"></i></div>
+                    <h3 class="font-bold mb-1">Host at Aida</h3>
+                    <p class="text-sm text-white/50 mb-3">Birthdays, company retreats, nikah, graduations. Capacity 20-150.</p>
+                    <span class="text-gold text-sm font-semibold">Check Availability →</span>
+                </button>
+                <!-- Card 4 -->
+                <button onclick="openModal('catering-modal')" class="text-left bg-card border border-cardBorder hover:border-gold/30 rounded-2xl p-5 group transition">
+                    <div class="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-gold/15 flex items-center justify-center mb-4"><i data-lucide="truck" class="w-5 h-5 text-gold"></i></div>
+                    <h3 class="font-bold mb-1">Outside Catering</h3>
+                    <p class="text-sm text-white/50 mb-3">We bring the kitchen to you. Weddings, funerals, corporate.</p>
+                    <span class="text-gold text-sm font-semibold">Get Quote →</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== MENU SECTION ==================== -->
+        <section id="menu" class="py-10">
+            <!-- Section Header - Matches your screenshot style -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <span class="hidden md:block writing-mode-vertical text-[10px] tracking-[0.3em] text-gold/50 uppercase rotate-180" style="writing-mode: vertical-rl;">قائمة الطعام</span>
+                        <h2 class="font-serif text-3xl md:text-4xl">Explore Our Menu</h2>
+                    </div>
+                    <p class="text-white/50 text-sm mt-2">Handcrafted with the freshest halal ingredients. All prices in UGX.</p>
+                </div>
+                <div class="relative w-full md:w-72">
+                    <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30"></i>
+                    <input id="search-input" type="text" placeholder="Search pilau, grill, juice..." class="w-full bg-card border border-cardBorder rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-gold/50">
+                </div>
+            </div>
+
+            <!-- Category Pills -->
+            <div id="category-pills" class="flex gap-2 overflow-x-auto scrollbar-hide pb-4">
+                <!-- Buttons injected by JS -->
+            </div>
+
+            <!-- Menu Grid -->
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Cards injected by JS -->
+            </div>
+        </section>
+
+        <!-- ==================== EVENTS & CATERING INFO ==================== -->
+        <section id="events" class="py-12 grid md:grid-cols-2 gap-6">
+            <div class="bg-card border border-cardBorder rounded-[24px] p-6 md:p-8">
+                <span class="bg-gold/10 text-gold text-xs font-bold px-3 py-1 rounded-full border border-gold/20">IN-HOUSE EVENTS</span>
+                <h3 class="font-serif text-2xl mt-4 mb-3">Celebrate at Aida Cafe</h3>
+                <p class="text-white/60 text-sm mb-5">Private space in Mbarara Bus Park, decorated to your theme. Sound, AC, prayer area available.</p>
+                <ul class="space-y-2 text-sm text-white/70 mb-6">
+                    <li>✓ Birthday Parties & Graduations</li>
+                    <li>✓ Company Retreats & Meetings (Projector available)</li>
+                    <li>✓ Nikah, Introductions, Family Gatherings</li>
+                    <li>✓ Capacity: 20 - 150 guests</li>
+                </ul>
+                <button onclick="openModal('event-modal')" class="w-full bg-white text-black font-bold py-3 rounded-xl">Book Event Space</button>
+            </div>
+            <div class="bg-[#1a1400] border border-gold/20 rounded-[24px] p-6 md:p-8">
+                <span class="bg-gold text-black text-xs font-bold px-3 py-1 rounded-full">OUTSIDE CATERING</span>
+                <h3 class="font-serif text-2xl mt-4 mb-3 text-goldLight">We Come To You</h3>
+                <p class="text-white/60 text-sm mb-5">Full-service halal catering across Mbarara district. Food, staff, tents, chairs, decor.</p>
+                <ul class="space-y-2 text-sm text-white/70 mb-6">
+                    <li>✓ Weddings & Kwanjula</li>
+                    <li>✓ Corporate Luncheons & Retreats</li>
+                    <li>✓ Burial & Memorial Services</li>
+                    <li>✓ Custom menu tasting before event</li>
+                </ul>
+                <button onclick="openModal('catering-modal')" class="w-full bg-gold hover:bg-goldLight text-black font-bold py-3 rounded-xl">Request Catering Quote</button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/10 py-10 text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between gap-6">
+                <div>
+                    <h4 class="font-bold">AIDA CAFE</h4>
+                    <p class="text-sm text-white/50">Mbarara Bus Park, Mbarara City, Uganda<br>100% Halal • Open Daily 7am - 11pm</p>
+                </div>
+                <div class="text-sm text-white/50">
+                    <p>WhatsApp: +256 789 462 495</p>
+                    <p>Delivery around Mbarara Town • Dine-in & Takeaway</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- ==================== CART DRAWER ==================== -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeCart()"></div>
+        <div class="absolute right-0 top-0 h-full w-full sm:w-[400px] bg-[#111] border-l border-white/10 flex flex-col">
+            <div class="p-6 border-b border-white/10 flex justify-between items-center">
+                <h3 class="font-bold text-lg">Your Order <span id="cart-count-2" class="text-gold">(0)</span></h3>
+                <button onclick="closeCart()" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+            <div class="p-6 border-t border-white/10 bg-[#0e0e0e]">
+                <div class="space-y-2 text-sm mb-4">
+                    <div class="flex justify-between text-white/60"><span>Subtotal</span><span id="cart-subtotal">UGX 0</span></div>
+                    <div class="flex justify-between text-white/60"><span>Delivery Fee</span><span>UGX 5,000</span></div>
+                    <div class="flex justify-between font-bold text-lg"><span>Total</span><span id="cart-total" class="text-gold">UGX 5,000</span></div>
+                </div>
+                <button onclick="openModal('delivery-modal')" class="w-full bg-gold hover:bg-goldLight text-black font-bold py-3.5 rounded-xl">Checkout on WhatsApp</button>
+                <p class="text-[11px] text-white/30 text-center mt-2">You will be redirected to WhatsApp to confirm</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL TEMPLATE ==================== -->
+    <!-- We reuse same modal wrapper, content changes by id -->
+
+    <!-- TABLE BOOKING MODAL -->
+    <div id="table-modal" class="modal fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('table-modal')"></div>
+        <div class="absolute inset-0 overflow-y-auto p-4 flex items-center justify-center">
+            <div class="bg-[#161616] border border-white/10 w-full max-w-lg rounded-[24px] p-6 relative">
+                <button onclick="closeModal('table-modal')" class="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button>
+                <h3 class="font-serif text-2xl mb-1">Reserve a Table</h3>
+                <p class="text-white/50 text-sm mb-6">Free booking. Confirmation via WhatsApp.</p>
+                <form id="table-form" class="space-y-4" onsubmit="submitTableBooking(event)">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input required name="name" placeholder="Your Name" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full focus:border-gold/50 focus:outline-none">
+                        <input required name="phone" placeholder="Phone Number" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full focus:border-gold/50 focus:outline-none">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <input required name="date" type="date" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full focus:border-gold/50 focus:outline-none">
+                        <input required name="time" type="time" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full focus:border-gold/50 focus:outline-none">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select name="guests" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full focus:border-gold/50 focus:outline-none">
+                            <option>1 Guest</option><option>2 Guests</option><option>3 Guests</option><option>4 Guests</option><option>5-8 Guests</option><option>9-20 Guests</option>
+                        </select>
+                        <select name="occasion" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full focus:border-gold/50 focus:outline-none">
+                            <option>Casual Dining</option><option>Birthday</option><option>Date / Anniversary</option><option>Business Meeting</option><option>Family Gathering</option>
+                        </select>
+                    </div>
+                    <textarea name="request" placeholder="Special request (optional)" rows="2" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full focus:border-gold/50 focus:outline-none"></textarea>
+                    <button type="submit" class="w-full bg-gold hover:bg-goldLight text-black font-bold py-3.5 rounded-xl flex items-center justify-center gap-2">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i> Send Booking via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELIVERY MODAL -->
+    <div id="delivery-modal" class="modal fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('delivery-modal')"></div>
+        <div class="absolute inset-0 overflow-y-auto p-4 flex items-center justify-center">
+            <div class="bg-[#161616] border border-white/10 w-full max-w-lg rounded-[24px] p-6 relative">
+                <button onclick="closeModal('delivery-modal')" class="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button>
+                <h3 class="font-serif text-2xl mb-1">Delivery Details</h3>
+                <p class="text-white/50 text-sm mb-4">We deliver hot in 15-30 mins around Mbarara.</p>
+                <div id="delivery-summary" class="bg-black/50 border border-white/5 rounded-xl p-3 text-sm mb-4 max-h-[120px] overflow-y-auto"></div>
+                <form id="delivery-form" class="space-y-3" onsubmit="submitDelivery(event)">
+                    <input required name="name" placeholder="Full Name" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                    <input required name="phone" placeholder="Phone / WhatsApp Number" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                    <input required name="address" placeholder="Delivery Address (e.g. Kijungu, Near Bus Park)" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                    <textarea name="instructions" placeholder="Delivery instructions (gate, building...)" rows="2" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full"></textarea>
+                    <button type="submit" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3.5 rounded-xl">Confirm Order on WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- EVENT MODAL -->
+    <div id="event-modal" class="modal fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('event-modal')"></div>
+        <div class="absolute inset-0 overflow-y-auto p-4 flex items-center justify-center">
+            <div class="bg-[#161616] border border-white/10 w-full max-w-lg rounded-[24px] p-6 relative my-8">
+                <button onclick="closeModal('event-modal')" class="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button>
+                <h3 class="font-serif text-2xl mb-1">Host Your Event at Aida</h3>
+                <p class="text-white/50 text-sm mb-6">Birthdays, retreats, meetings, nikah.</p>
+                <form class="space-y-3" onsubmit="submitEventBooking(event)">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input required name="name" placeholder="Your Name" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                        <input required name="phone" placeholder="Phone" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                    </div>
+                    <select required name="type" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                        <option>Birthday Party</option><option>Company Retreat</option><option>Graduation Party</option><option>Nikah / Introduction</option><option>Business Meeting / Conference</option><option>Other</option>
+                    </select>
+                    <div class="grid grid-cols-2 gap-3">
+                        <input required name="guests" type="number" placeholder="Expected Guests" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                        <input required name="date" type="date" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                    </div>
+                    <input name="budget" placeholder="Estimated Budget (UGX) - optional" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                    <textarea name="details" placeholder="Tell us about decoration, sound, food needs..." rows="3" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full"></textarea>
+                    <button type="submit" class="w-full bg-gold text-black font-bold py-3.5 rounded-xl">Send Event Inquiry via WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- OUTSIDE CATERING MODAL -->
+    <div id="catering-modal" class="modal fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('catering-modal')"></div>
+        <div class="absolute inset-0 overflow-y-auto p-4 flex items-center justify-center">
+            <div class="bg-[#161616] border border-white/10 w-full max-w-lg rounded-[24px] p-6 relative my-8">
+                <button onclick="closeModal('catering-modal')" class="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button>
+                <h3 class="font-serif text-2xl mb-1">Outside Catering Quote</h3>
+                <p class="text-white/50 text-sm mb-6">We bring Aida kitchen to your venue.</p>
+                <form class="space-y-3" onsubmit="submitCatering(event)">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input required name="name" placeholder="Your Name" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                        <input required name="phone" placeholder="Phone" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                    </div>
+                    <input required name="eventType" placeholder="Event Type (Wedding, Funeral, Corporate...)" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                    <input required name="location" placeholder="Event Location / Village / Town" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input required name="guests" type="number" placeholder="No. of Guests" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                        <input required name="date" type="date" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full">
+                    </div>
+                    <div class="bg-black/50 border border-white/10 rounded-xl p-3">
+                        <p class="text-xs font-bold text-white/70 mb-2">Menu Preference (tick all needed):</p>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <label class="flex gap-2 items-center"><input type="checkbox" name="menu" value="Chicken Pilau"> Chicken Pilau</label>
+                            <label class="flex gap-2 items-center"><input type="checkbox" name="menu" value="Beef Biryani"> Beef Biryani</label>
+                            <label class="flex gap-2 items-center"><input type="checkbox" name="menu" value="BBQ / Muchomo"> BBQ / Muchomo</label>
+                            <label class="flex gap-2 items-center"><input type="checkbox" name="menu" value="Matooke Buffet"> Matooke Buffet</label>
+                            <label class="flex gap-2 items-center"><input type="checkbox" name="menu" value="Snacks & Mandazi"> Snacks</label>
+                            <label class="flex gap-2 items-center"><input type="checkbox" name="menu" value="Drinks & Juice"> Drinks</label>
+                        </div>
+                    </div>
+                    <textarea name="extra" placeholder="Need tents, chairs, decoration, service staff?" rows="2" class="bg-black border border-white/10 rounded-xl px-4 py-3 text-sm w-full"></textarea>
+                    <button type="submit" class="w-full bg-gold text-black font-bold py-3.5 rounded-xl">Get Quote on WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT - READABLE & COMMENTED ==================== -->
+    <script>
+    // ==================== 1. CONFIGURATION - EDIT THESE EASILY ====================
+    const WHATSAPP_NUMBER = "256789462495"; // Your WhatsApp number without + or spaces
+    const DELIVERY_FEE = 5000; // UGX
+    const CURRENCY = "UGX";
+
+    // Format money: 15000 => UGX 15,000
+    function formatMoney(amount) {
+        return CURRENCY + " " + amount.toLocaleString();
+    }
+
+    // Build WhatsApp link with pre-filled message
+    function openWhatsApp(message) {
+        const encoded = encodeURIComponent(message);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+        window.open(url, "_blank");
+    }
+
+    // ==================== 2. MENU DATA - EDIT MENU HERE ====================
+    // To add a new dish: copy one object, paste at end, change id, name, price, etc.
+    // To change price: just edit the price number.
+    // Image: paste Unsplash or your own image URL.
+    const menuItems = [
+        { id: 1, name: "Chicken Pilau Special", price: 18000, category: "Pilau & Biryani", desc: "Fragrant rice, tender chicken, kachumbari & chili", image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&q=80", badge: "Best Seller" },
+        { id: 2, name: "Beef Biryani", price: 22000, category: "Pilau & Biryani", desc: "Layered basmati, spiced beef, fried onions, raita", image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500&q=80", badge: "" },
+        { id: 3, name: "Family Pilau Feast", price: 45000, category: "Pilau & Biryani", desc: "Serves 4, chicken, beef, 2 sodas, kachumbari", image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80", badge: "Family" },
+        { id: 4, name: "Grilled Goat Muchomo", price: 25000, category: "Grills & BBQ", desc: "1kg charcoal grilled goat, matooke, kachumbari", image: "https://images.unsplash.com/photo-1546964053-d9334ceb32ee?w=500&q=80", badge: "" },
+        { id: 5, name: "Chicken Tikka BBQ", price: 20000, category: "Grills & BBQ", desc: "Half chicken, fries or matooke, coleslaw", image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=500&q=80", badge: "Spicy" },
+        { id: 6, name: "Beef Kebab Platter", price: 18000, category: "Grills & BBQ", desc: "5 sticks, fries, chili sauce & salad", image: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=500&q=80", badge: "" },
+        { id: 7, name: "Matooke & Beef Stew", price: 15000, category: "Local Favorites", desc: "Traditional matooke, gnut sauce, beef luwombo style", image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80", badge: "Local" },
+        { id: 8, name: "Katogo - Matooke & Beans", price: 12000, category: "Local Favorites", desc: "Hearty breakfast katogo, avocado, tea optional", image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=80", badge: "" },
+        { id: 9, name: "Rolex Deluxe", price: 8000, category: "Local Favorites", desc: "2 eggs, chapati, minced meat, veggies, cheese", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80", badge: "" },
+        { id: 10, name: "Mandazi & Mahamri (6pcs)", price: 6000, category: "Breakfast", desc: "Fresh Swahili donuts, cardamom scented", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&q=80", badge: "" },
+        { id: 11, name: "Aida Breakfast Combo", price: 15000, category: "Breakfast", desc: "2 mandazi, beans, 2 eggs, tea & juice", image: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=500&q=80", badge: "" },
+        { id: 12, name: "Fresh Passion Juice", price: 5000, category: "Drinks & Desserts", desc: "100% natural passion, no sugar added", image: "https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=500&q=80", badge: "" },
+    ];
+
+    // Categories - must match categories in menuItems above + "All"
+    const categories = ["All", "Pilau & Biryani", "Grills & BBQ", "Local Favorites", "Breakfast", "Drinks & Desserts"];
+
+    // ==================== 3. APP STATE ====================
+    let activeCategory = "All"; // Currently selected category
+    let searchQuery = ""; // What user typed in search
+    let cart = JSON.parse(localStorage.getItem("aida_cart") || "[]"); // Load cart from storage or empty
+
+    // Save cart to localStorage so it persists after refresh
+    function saveCart() {
+        localStorage.setItem("aida_cart", JSON.stringify(cart));
+        updateCartCount();
+    }
+
+    // ==================== 4. RENDER CATEGORY PILLS ====================
+    function renderCategories() {
+        const container = document.getElementById("category-pills");
+        container.innerHTML = categories.map(cat => {
+            const isActive = cat === activeCategory;
+            // Active pill is gold, inactive is dark
+            return `
+                <button onclick="setCategory('${cat}')"
+                    class="whitespace-nowrap px-5 py-2.5 rounded-full text-sm font-semibold border transition
+                    ${isActive ? 'bg-gold text-black border-gold shadow-lg shadow-gold/20' : 'bg-card text-white/60 border-cardBorder hover:border-white/20 hover:text-white'}">
+                    ${cat}
+                </button>
+            `;
+        }).join("");
+    }
+
+    function setCategory(cat) {
+        activeCategory = cat;
+        renderCategories();
+        renderMenu();
+    }
+
+    // ==================== 5. RENDER MENU GRID ====================
+    function getFilteredMenu() {
+        return menuItems.filter(item => {
+            const matchCategory = activeCategory === "All" || item.category === activeCategory;
+            const matchSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || item.desc.toLowerCase().includes(searchQuery.toLowerCase());
+            return matchCategory && matchSearch;
+        });
+    }
+
+    function renderMenu() {
+        const grid = document.getElementById("menu-grid");
+        const filtered = getFilteredMenu();
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div class="col-span-full text-center py-12 text-white/40">No dishes found. Try another search.</div>`;
+            return;
+        }
+
+        grid.innerHTML = filtered.map(item => `
+            <div class="bg-card border border-cardBorder rounded-2xl overflow-hidden hover:border-gold/30 transition group fade-in">
+                <div class="relative h-44 overflow-hidden">
+                    <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    ${item.badge ? `<span class="absolute top-3 left-3 bg-gold text-black text-[10px] font-bold px-2.5 py-1 rounded-full">${item.badge}</span>` : ""}
+                    <span class="absolute top-3 right-3 bg-black/70 backdrop-blur text-white text-[10px] px-2 py-1 rounded-full border border-white/10">حلال HALAL</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start gap-2 mb-1">
+                        <h3 class="font-bold leading-tight">${item.name}</h3>
+                        <span class="text-gold font-bold text-sm shrink-0">${formatMoney(item.price)}</span>
+                    </div>
+                    <p class="text-white/50 text-xs leading-relaxed mb-4 line-clamp-2">${item.desc}</p>
+                    <button onclick="addToCart(${item.id})" class="w-full bg-white/5 hover:bg-gold hover:text-black border border-white/10 hover:border-gold text-white text-sm font-semibold py-2.5 rounded-xl transition flex items-center justify-center gap-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i> Add to Order
+                    </button>
+                </div>
+            </div>
+        `).join("");
+
+        lucide.createIcons(); // Refresh icons after injecting HTML
+    }
+
+    // ==================== 6. CART LOGIC ====================
+    function addToCart(id) {
+        const existing = cart.find(i => i.id === id);
+        if (existing) {
+            existing.qty += 1; // If already in cart, increase qty
+        } else {
+            const item = menuItems.find(i => i.id === id);
+            cart.push({ ...item, qty: 1 }); // Add new item with qty 1
+        }
+        saveCart();
+        renderCart();
+        openCart();
+        showToast("Added to cart");
+    }
+
+    function changeQty(id, delta) {
+        const item = cart.find(i => i.id === id);
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) {
+            cart = cart.filter(i => i.id !== id); // Remove if qty 0
+        }
+        saveCart();
+        renderCart();
+    }
+
+    function renderCart() {
+        const container = document.getElementById("cart-items");
+        const count = cart.reduce((sum, i) => sum + i.qty, 0);
+
+        if (cart.length === 0) {
+            container.innerHTML = `<div class="text-center py-16 text-white/30"><i data-lucide="shopping-bag" class="w-10 h-10 mx-auto mb-3 opacity-20"></i><p>Your cart is empty</p><p class="text-xs mt-1">Add some delicious Halal dishes</p></div>`;
+        } else {
+            container.innerHTML = cart.map(item => `
+                <div class="bg-white/[0.04] border border-white/5 rounded-xl p-3 flex gap-3">
+                    <img src="${item.image}" class="w-16 h-16 rounded-lg object-cover">
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-sm">${item.name}</h4>
+                        <p class="text-gold text-sm font-bold">${formatMoney(item.price)}</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-7 h-7 bg-white/10 rounded-full flex items-center justify-center">-</button>
+                            <span class="text-sm w-6 text-center">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-7 h-7 bg-gold text-black rounded-full flex items-center justify-center">+</button>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        // Update totals
+        const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+        const total = subtotal + (cart.length ? DELIVERY_FEE : 0);
+        document.getElementById("cart-subtotal").textContent = formatMoney(subtotal);
+        document.getElementById("cart-total").textContent = formatMoney(total);
+        document.getElementById("cart-count-2").textContent = `(${count})`;
+
+        // Update delivery summary in modal too
+        document.getElementById("delivery-summary").innerHTML = cart.map(i => `${i.qty}x ${i.name} - ${formatMoney(i.price * i.qty)}`).join("<br>") || "No items";
+
+        lucide.createIcons();
+    }
+
+    function updateCartCount() {
+        const count = cart.reduce((sum, i) => sum + i.qty, 0);
+        document.getElementById("cart-count").textContent = count;
+    }
+
+    function openCart() { document.getElementById("cart-drawer").classList.remove("hidden"); renderCart(); }
+    function closeCart() { document.getElementById("cart-drawer").classList.add("hidden"); }
+
+    // ==================== 7. MODAL HELPERS ====================
+    function openModal(id) {
+        document.getElementById(id).classList.remove("hidden");
+        document.body.style.overflow = "hidden"; // Prevent background scroll
+        lucide.createIcons();
+    }
+    function closeModal(id) {
+        document.getElementById(id).classList.add("hidden");
+        document.body.style.overflow = "";
+    }
+    function scrollToMenu() {
+        document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Simple toast notification
+    function showToast(msg) {
+        let t = document.createElement("div");
+        t.textContent = msg;
+        t.className = "fixed bottom-6 left-1/2 -translate-x-1/2 bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold shadow-xl z-[60]";
+        document.body.appendChild(t);
+        setTimeout(() => t.remove(), 2000);
+    }
+
+    // ==================== 8. WHATSAPP SUBMIT HANDLERS ====================
+    // Each form builds a message string, then calls openWhatsApp(message)
+
+    function submitTableBooking(e) {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        const msg = `As-salamu Alaikum Aida Cafe! 🕌%0A%0A*TABLE BOOKING REQUEST*%0A%0A` +
+        `Name: ${data.get("name")}%0APhone: ${data.get("phone")}%0ADate: ${data.get("date")}%0ATime: ${data.get("time")}%0AGuests: ${data.get("guests")}%0AOccasion: ${data.get("occasion")}%0ARequest: ${data.get("request") || "None"}%0A%0ALocation: Mbarara Bus Park%0APlease confirm my table.`;
+        openWhatsApp(decodeURIComponent(msg)); // decode then re-encode inside function
+        closeModal("table-modal");
+    }
+
+    function submitDelivery(e) {
+        e.preventDefault();
+        if (cart.length === 0) { alert("Cart is empty"); return; }
+        const data = new FormData(e.target);
+        let itemsText = cart.map(i => `• ${i.qty}x ${i.name} - ${formatMoney(i.price * i.qty)}`).join("%0A");
+        const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
+        const total = subtotal + DELIVERY_FEE;
+        const msg = `As-salamu Alaikum Aida Cafe! 🛵%0A%0A*NEW DELIVERY ORDER*%0A%0A${itemsText}%0A%0ASubtotal: ${formatMoney(subtotal)}%0ADelivery: ${formatMoney(DELIVERY_FEE)}%0A*Total: ${formatMoney(total)}*%0A%0AName: ${data.get("name")}%0APhone: ${data.get("phone")}%0AAddress: ${data.get("address")}%0ANotes: ${data.get("instructions") || "None"}%0A%0APlease confirm my order.`;
+        openWhatsApp(msg);
+        closeModal("delivery-modal");
+    }
+
+    function submitEventBooking(e) {
+        e.preventDefault();
+        const d = new FormData(e.target);
+        const msg = `As-salamu Alaikum Aida Cafe! 🎉%0A%0A*EVENT HOSTING INQUIRY - At Your Venue*%0A%0AName: ${d.get("name")}%0APhone: ${d.get("phone")}%0AEvent Type: ${d.get("type")}%0AGuests: ${d.get("guests")}%0ADate: ${d.get("date")}%0ABudget: ${d.get("budget") || "Not specified"}%0ADetails: ${d.get("details") || "None"}%0A%0APlease check availability.`;
+        openWhatsApp(msg);
+        closeModal("event-modal");
+    }
+
+    function submitCatering(e) {
+        e.preventDefault();
+        const d = new FormData(e.target);
+        const menus = [...document.querySelectorAll('input[name="menu"]:checked')].map(cb=>cb.value).join(", ") || "Not specified";
+        const msg = `As-salamu Alaikum Aida Cafe! 🍲%0A%0A*OUTSIDE CATERING REQUEST*%0A%0AName: ${d.get("name")}%0APhone: ${d.get("phone")}%0AEvent: ${d.get("eventType")}%0ALocation: ${d.get("location")}%0AGuests: ${d.get("guests")}%0ADate: ${d.get("date")}%0AMenu Wanted: ${menus}%0AExtras: ${d.get("extra") || "None"}%0A%0APlease send me a quote.`;
+        openWhatsApp(msg);
+        closeModal("catering-modal");
+    }
+
+    // ==================== 9. INIT - Runs when page loads ====================
+    document.addEventListener("DOMContentLoaded", () => {
+        renderCategories();
+        renderMenu();
+        updateCartCount();
+        lucide.createIcons();
+
+        // Search input listener
+        document.getElementById("search-input").addEventListener("input", (e) => {
+            searchQuery = e.target.value;
+            renderMenu();
+        });
+
+        // Close modals with ESC key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                document.querySelectorAll(".modal").forEach(m => m.classList.add("hidden"));
+                closeCart();
+                document.body.style.overflow = "";
+            }
+        });
+    });
+
+    </script>
+</body>
+</html>
